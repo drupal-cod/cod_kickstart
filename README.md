@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Welcome to cod!
 COD, or Conference Organizing Distribution, is an installation profile for 
 Drupal, that makes it easy to create a conference website with features 
@@ -86,5 +85,3 @@ TO DO
 TO DO
 
 
-
->>>>>>> e084a2d5c83a54935828ec65c7bb6c8484d6c71e
