@@ -8,6 +8,10 @@ about COD's features on usecod.com and https://www.drupal.org/project/cod
 For the latest information related to the process of porting this
 installation profile to D8, be sure to see https://www.drupal.org/node/2605232
 
+| Important! |
+| --- |
+| This is still **very much in development** and is not ready for use |
+
 ## Resources
 
 * [JIRA](https://drupalcod.atlassian.net/secure/RapidBoard.jspa?rapidView=11&projectKey=COD)
