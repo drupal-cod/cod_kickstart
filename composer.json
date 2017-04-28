@@ -1,0 +1,17 @@
+{
+  "name": "drupal-cod",
+  "description": "A tool for building interactive conference websites.",
+  "type": "drupal-profile",
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {
+    "cweagans/composer-patches": "^1.5.0"
+  }
+}

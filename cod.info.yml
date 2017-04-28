@@ -1,0 +1,29 @@
+# This is a development version. Therefore most cod modules are disabled by default, and devel modules are enabled.
+name: cod
+type: profile
+description: "A tool for building interactive conference websites."
+project: "cod"
+core: 8.x
+exclusive: TRUE
+
+# Core modules.
+dependencies:
+ - block
+ - comment
+ - dblog
+ - field
+ - field_ui
+ - file
+ - image
+ - list
+ - menu
+ - node
+ - number
+ - options
+ - path
+ - search
+ - taxonomy
+ - forum
+
+distribution:
+  name: "Conference Organizing Distribution"
