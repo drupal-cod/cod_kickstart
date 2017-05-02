@@ -1,0 +1,94 @@
+# This is a development version. Therefore most cod modules are disabled by default, and devel modules are enabled.
+name: cod
+type: profile
+description: "A tool for building interactive conference websites."
+project: "cod"
+core: 8.x
+exclusive: TRUE
+distribution:
+  name: "Conference Organizing Distribution"
+
+dependencies:
+# Core modules.
+ - block
+ - ckeditor
+ - comment
+ - dblog
+ - entity_reference
+ - field
+ - field_ui
+ - file
+ - filter
+ - image
+ - link
+ - list
+ - menu
+ - node
+ - number
+ - options
+ - path
+ - search
+ - taxonomy
+ - text
+ - forum
+ - update
+ - user
+ - views
+
+
+# Contrib
+ - address
+ # admin_menu
+ # admin_menu_toolbar
+ # adminimal_admin_menu
+ # advanced_help
+ # auto_nodetitle
+ # content_access
+ # contextual
+ - ctools
+ # dashboard
+ - date
+ #dependencies[] = date_api
+ #dependencies[] = date_popup
+ #dependencies[] = date_tools
+ #dependencies[] = date_views
+ - devel
+ - devel_generate
+ - diff
+ #dependencies[] = distro_update
+ #dependencies[] = efq_extra_field
+ #dependencies[] = entityreference_prepopulate
+ #dependencies[] = entity_token
+ - features
+ - field_group
+ - field_permissions
+ #dependencies[] = field_select_ct
+ - field_collection
+ #dependencies[] = field_sql_storage
+ - flag
+ - inline_entity_form
+ #dependencies[] = libraries
+ #dependencies[] = link
+ - og
+ #dependencies[] = og_access
+ #dependencies[] = og_context
+ #dependencies[] = og_ui
+ - pathauto
+ - panels
+ - page_manager
+ - quicktabs
+ #dependencies[] = quicktabs_tabstyles
+ - rules
+ - rules_admin
+ #dependencies[] = strongarm
+ - token
+ #dependencies[] = views_argument_substitutions
+ #dependencies[] = views_autorefresh
+ #dependencies[] = views_field_view
+ #dependencies[] = views_bulk_operations
+ #dependencies[] = views_content
+ #dependencies[] = views_data_export
+ #dependencies[] = views_json
+ - views
+ - views_ui
+ - webform

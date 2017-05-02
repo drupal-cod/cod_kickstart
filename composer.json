@@ -1,86 +1,41 @@
 {
-  "name": "acquia/blt-project",
-  "description": "Project template for Drupal 8 sites built with BLT.",
-  "type": "project",
+  "name": "drupal/cod",
+  "description": "A tool for building interactive conference websites.",
+  "type": "drupal-profile",
+  "license": "GPL-2.0+",
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "repositories": {
-    "drupal-cod-program": {
-      "type": "package",
-      "package": {
-        "name": "drupal-cod/program",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/drupal-cod/program.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
-    },
-    "drupal-cod-sponsor": {
-      "type": "package",
-      "package": {
-        "name": "drupal-cod/sponsors",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/drupal-cod/sponsors.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
     }
+  ],
+  "scripts": {
+    "post-install-cmd": [
+      "@composer drupal-scaffold"
+    ],
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
   },
-    "require": {
-      "acquia/blt": "^8.3",
-      "drupal-cod/program": "dev-master",
-      "drupal-cod/sponsors": "dev-master"
-    },
-    "require-dev": {},
-    "extra": {
-        "enable-patching": true,
-        "installer-paths": {
-            "docroot/core": [
-                "type:drupal-core"
-            ],
-            "docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "docroot/modules/custom/{$name}": [
-                "type:drupal-custom-module"
-            ],
-            "docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "docroot/profiles/custom/{$name}": [
-                "type:drupal-custom-profile"
-            ],
-            "docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "docroot/themes/custom/{$name}": [
-                "type:drupal-custom-theme"
-            ],
-            "docroot/libraries/{$name}": [
-                "type:drupal-library"
-            ],
-            "drush/contrib/{$name}": [
-                "type:drupal-drush"
-            ]
-        },
-    "merge-plugin": {
-      "require": [
-        "vendor/acquia/blt/composer.required.json",
-        "vendor/acquia/blt/composer.suggested.json"
-      ],
-      "include": [
-        "blt/composer.overrides.json"
-      ],
-      "merge-extra": true,
-      "merge-extra-deep": true,
-      "merge-scripts": true,
-      "replace": true
-      }
+  "require": {
+    "cweagans/composer-patches": "^1.5.0",
+    "drupal/address": "~1.0",
+    "drupal/date": "1.x-dev",
+    "drupal/devel": "~1.0",
+    "drupal/diff": "~1.0",
+    "drupal/features": "^3.5",
+    "drupal/flag": "~4.0",
+    "drupal/field_collection": "3.x-dev",
+    "drupal/field_group": "~1.0",
+    "drupal/field_permissions": "~1.0",
+    "drupal/inline_entity_form": "~1.0",
+    "drupal/pathauto": "~1.0",
+    "drupal/webform": "5.x-dev",
+    "drupal/og": "1.x-dev",
+    "drupal/panels": "^4.1",
+    "drupal/page_manager": "4.x-dev",
+    "drupal/quicktabs": "~3.0",
+    "drupal/rules": "~3.0",
+    "drupal/token": "~1.0"
   }
 }
