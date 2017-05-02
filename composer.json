@@ -5,7 +5,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": {
-    "drupal-cod-program": {
+    "0": {
       "type": "package",
       "package": {
         "name": "drupal-cod/program",
@@ -18,7 +18,7 @@
         }
       }
     },
-    "drupal-cod-sponsor": {
+    "1": {
       "type": "package",
       "package": {
         "name": "drupal-cod/sponsors",
@@ -30,12 +30,40 @@
           "reference": "master"
         }
       }
+    },
+    "2": {
+      "type": "package",
+      "package": {
+        "name": "drupal-cod/event",
+        "type": "drupal-module",
+        "version": "master",
+        "source": {
+          "url": "https://github.com/drupal-cod/event.git",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    },
+    "3": {
+      "type": "package",
+      "package": {
+        "name": "drupal-cod/ticket",
+        "type": "drupal-module",
+        "version": "master",
+        "source": {
+          "url": "https://github.com/drupal-cod/ticket.git",
+          "type": "git",
+          "reference": "master"
+        }
+      }
     }
   },
     "require": {
       "acquia/blt": "^8.3",
       "drupal-cod/program": "dev-master",
-      "drupal-cod/sponsors": "dev-master"
+      "drupal-cod/sponsors": "dev-master",
+      "drupal-cod/event": "dev-master",
+      "drupal-cod/ticket": "dev-master"
     },
     "require-dev": {},
     "extra": {
