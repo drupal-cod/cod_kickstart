@@ -11,6 +11,12 @@
       "url": "https://packages.drupal.org/8"
     }
   ],
+  "scripts": {
+    "post-install-cmd": [
+      "@composer drupal-scaffold"
+    ],
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+  },
   "require": {
     "cweagans/composer-patches": "^1.5.0",
     "drupal/address": "~1.0",
