@@ -12,6 +12,24 @@
     }
   ],
   "require": {
-    "cweagans/composer-patches": "^1.5.0"
+    "cweagans/composer-patches": "^1.5.0",
+    "drupal/address": "~1.0",
+    "drupal/date": "1.x-dev",
+    "drupal/devel": "~1.0",
+    "drupal/diff": "~1.0",
+    "drupal/features": "^3.5",
+    "drupal/flag": "~4.0",
+    "drupal/field_collection": "3.x-dev",
+    "drupal/field_group": "~1.0",
+    "drupal/field_permissions": "~1.0",
+    "drupal/inline_entity_form": "~1.0",
+    "drupal/pathauto": "~1.0",
+    "drupal/webform": "5.x-dev",
+    "drupal/og": "1.x-dev",
+    "drupal/panels": "^4.1",
+    "drupal/page_manager": "4.x-dev",
+    "drupal/quicktabs": "~3.0",
+    "drupal/rules": "~3.0",
+    "drupal/token": "~1.0"
   }
 }
