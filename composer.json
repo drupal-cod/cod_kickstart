@@ -1,5 +1,5 @@
 {
-  "name": "drupal-cod/cod",
+  "name": "drupal/cod",
   "description": "A tool for building interactive conference websites.",
   "type": "drupal-profile",
   "license": "GPL-2.0+",
