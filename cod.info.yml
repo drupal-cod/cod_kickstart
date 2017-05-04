@@ -21,10 +21,8 @@ dependencies:
  - filter
  - image
  - link
- - list
- - menu
+ - menu_ui
  - node
- - number
  - options
  - path
  - search
@@ -47,7 +45,6 @@ dependencies:
  # contextual
  - ctools
  # dashboard
- - date
  #dependencies[] = date_api
  #dependencies[] = date_popup
  #dependencies[] = date_tools
@@ -79,7 +76,6 @@ dependencies:
  - quicktabs
  #dependencies[] = quicktabs_tabstyles
  - rules
- - rules_admin
  #dependencies[] = strongarm
  - token
  #dependencies[] = views_argument_substitutions

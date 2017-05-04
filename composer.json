@@ -37,5 +37,15 @@
     "drupal/quicktabs": "~3.0",
     "drupal/rules": "~3.0",
     "drupal/token": "~1.0"
+  },
+  "extra": {
+    "patches": {
+      "drupal/rules": {
+        "https://www.drupal.org/node/2849779 Implement missing PluginDefinitionInterface methods": "https://www.drupal.org/files/issues/rules-fix-tests.patch"
+      },
+      "drupal/core": {
+        "Pluggable calendar backend": "https://www.drupal.org/files/1811912-calendar-26.patch"
+      }
+    }
   }
 }
