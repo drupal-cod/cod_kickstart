@@ -1,0 +1,600 @@
+<?php
+
+use Drupal\Core\Site\Settings;
+use Drupal\flag\Entity\Flag;
+
+/**
+ * Implements hook_requirements().
+ */
+function cod_requirements($phase) {
+  $requirements = array();
+  if($phase == 'install') {
+
+    // Test PHP minimum execution time
+    $requirements['php_max_execution_time'] = array(
+      'title' => t('PHP Max Execution Time'),
+      'value' => ini_get('max_execution_time'),
+    );
+    $max_execution_time = (int)ini_get('max_execution_time');
+    // Don't set the error when max_execution_time is 0 (Infinite).
+    if ($max_execution_time && $max_execution_time < DRUPAL_MINIMUM_MAX_EXECUTION_TIME) {
+      $requirements['php_max_execution_time']['description'] = t('Your PHP execution time is too low, please set it greater than or equal to %time seconds.', array('%time' => DRUPAL_MINIMUM_MAX_EXECUTION_TIME));
+      $requirements['php_max_execution_time']['severity'] = REQUIREMENT_ERROR;
+    }
+
+    // Check for APC / OPcache memory size.
+    if (($opcache_mem = ini_get('opcache.memory_consumption')) != NULL || ($apc_mem = ini_get('apc.shm_size')) != NULL) {
+      // Check for OPcache first, as APCu could be in use in addition to
+      // OPcache, in which case apc.shm_size can be ignored.
+      $ext_name = '';
+      $ini_name = '';
+      $ini_suffix = '';
+      if (!empty($opcache_mem)) {
+        $requirements['opcode_cache_size'] = array(
+          'title' => t('OPcache memory'),
+          'value' => $opcache_mem,
+        );
+        $ext_name = 'OPcache';
+        $ini_name = 'opcache.memory_consumption';
+        $ini_suffix = '';
+      }
+      elseif (!empty($apc_mem)) {
+        $requirements['opcode_cache_size'] = array(
+          'title' => t('APC shim size'),
+          'value' => $apc_mem,
+        );
+        $ext_name = 'APC';
+        $ini_name = 'apc.shm_size';
+        $ini_suffix = 'M';
+      }
+
+      $mem_size = intval(ini_get($ini_name));
+
+      if ($mem_size && $mem_size < COD_MINIMUM_OPCODE_CACHE) {
+        $requirements['opcode_cache_size']['description'] = t('%ext_name is installed but %mem_size is not enough opcode cache to successfully install COD.
+          Find your php configuration file(s) and change the <em>%ini_name</em> value to at least <em>%min_mem_size</em>.',
+          array(
+            '%ext_name' => $ext_name,
+            '%mem_size' => $mem_size . 'M',
+            '%ini_name' => $ini_name,
+            '%min_mem_size' => COD_MINIMUM_OPCODE_CACHE . $ini_suffix,
+          ));
+        $requirements['opcode_cache_size']['severity'] = REQUIREMENT_ERROR;
+      }
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function cod_install_tasks() {
+  //make sure we have more memory than 196M. if not lets try to increase it.
+  if (ini_get('memory_limit') != '-1' && ini_get('memory_limit') <= '196M' && ini_get('memory_limit') >= '128M') {
+    ini_set('memory_limit', '196M');
+  }
+
+  $selected_extras = Settings::get('cod_selected_extras', []);
+  // To Do - demo content
+  //$demo_content = variable_get('cod_install_example_content', FALSE);
+
+  // To Do - Acquia Connector
+  //$acquia_connector = variable_get('cod_install_acquia_connector', FALSE);
+
+  return array(
+    //'cod_acquia_connector_enable' => array(
+    //  'display' => FALSE,
+    //  'type' => '',
+    //  'run' => $acquia_connector ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
+    //),
+    //'cod_demo_content' => array(
+    //  'display' => FALSE,
+    //  'type' => '',
+    //  'run'
+    /*
+    'cod_create_first_event' => array(
+      'display_name' => t('Create the first conference'),
+      'display' => TRUE,
+      'type' => 'form',
+    ),
+    'cod_install_additional_modules' => array(
+      'display_name' => !empty($selected_extras['example_content']) ? t('Install example content') : t('Install additional functionality'),
+      'display' => FALSE,
+      'type' => 'batch',
+    ),*/
+    'cod_admin_permissions' => array(
+      'display' => FALSE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function cod_install_tasks_alter(&$tasks, $install_state) {
+  global $install_state;
+  $tasks['install_profile_modules']['display_name'] = t('Install Conference Organizing Distribution');
+
+  // Skip profile selection step.
+  $tasks['install_select_profile']['display'] = FALSE;
+
+  // Skip language selection install step and default language to English.
+  $tasks['install_select_locale']['display'] = FALSE;
+  $tasks['install_select_locale']['run'] = INSTALL_TASK_SKIP;
+  $install_state['parameters']['locale'] = 'en';
+
+  // Override "install_finished" task to redirect people to home page.
+  $tasks['install_finished']['function'] = 'cod_install_finished';
+}
+
+
+/**
+ * Override of install_finished() without the useless text.
+ */
+function cod_install_finished(&$install_state) {
+
+  // \Drupal::config('install_profile')
+  //  ->set(drupal_get_profile());
+
+  // BEGIN copy/paste from install_finished().
+  // Remove the bookmarks flag
+  $flag = Flag::load('bookmarks');
+  if($flag) {
+    $flag->delete();
+    $flag->disable();
+    \Drupal::entityTypeManager()->getStorage('flag')
+      ->resetCache();
+  }
+
+  /* Enable default settings for jquery_update
+  variable_set('jquery_update_compression_type', 'min');
+  variable_set('jquery_update_jquery_admin_version', '1.7');
+  variable_set('jquery_update_jquery_version', '1.8');*/
+
+  // Flush all caches to ensure that any full bootstraps during the installer
+  // do not leave stale cached data, and that any content types or other items
+  // registered by the installation profile are registered correctly.
+  drupal_flush_all_caches();
+
+  // Enable the Origins theme and set it as the default.
+  $cod_themes = array('omega', 'pisces', 'adminimal', 'fisherman');
+  // @todo: port pisces and fisherman themes.
+  $cod_themes = ['seven', 'omega'];
+  $theme_handler = \Drupal::service('theme_handler');
+  $theme_handler->enable($cod_themes);
+
+  // Set the default and administration themes.
+  $theme_config = \Drupal::configFactory()->getEditable('system.theme');
+  // @todo: change to pisces.
+  $theme_config->set('default', 'omega');
+  // Set a default administrative theme:
+  // @todo: change to fisherman.
+  $theme_config->set('admin', 'seven');
+  \Drupal::configFactory()->getEditable('node.settings')->set('use_admin_theme', FALSE);
+
+  // Turn off user-configurable timezones.
+  //variable_set('configurable_timezones', 0);
+
+  // The Stark theme is automatically enabled during installation. Disable it.
+  $theme_handler->disable(['stark']);
+
+  /**
+  // We make custom code for the footer here because we want people to be able to freely edit it if they wish.
+  $footer_body = '<p>'. t('A community events site, powered by the <a href="@drupal">Conference Organizing Distribution</a>', array('@drupal' => url('https://drupal.org/project/cod'))) . '</p>';
+
+  $footer_block_text = array(
+  'body' => t($footer_body),
+  'info' => t('Default Footer'),
+  'format' => 'full_html',
+  );
+
+  if (drupal_write_record('block_custom', $footer_block_text)) {
+  $footer_block = array(
+  'module' => 'block',
+  'delta' => $footer_block_text['bid'],
+  'theme' => 'pisces',
+  'visibility' => 0,
+  'region' => 'footer',
+  'status' => 1,
+  'pages' => 0,
+  'weight' => 1,
+  'title' => variable_get('site_name', 'Conference Organizing Distribution'),
+  );
+  drupal_write_record('block', $footer_block);
+  }
+
+  // Installation profiles are always loaded last
+  db_update('system')
+  ->fields(array('weight' => 1000))
+  ->condition('type', 'module')
+  ->condition('name', drupal_get_profile())
+  ->execute();
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  variable_set('title_node', array(
+  'auto_attach' => array('title' => 'title'),
+  'hide_label' => array('page' => 0, 'entity' => 0),
+  ));
+  //TODO: Hardcoded to the first event that is created.
+  if (module_exists('cod_session')) {
+  if ($first_event = node_load(1)) {
+  cod_session_generate_session_tracks($first_event, 'node', TRUE);
+  }
+  }
+
+  // Update Incorrect foreign key references.
+  // See https://www.drupal.org/node/1969018 for more info.
+  cod_update_7007();
+  // Run cron to populate update status tables (if available) so that users
+  // will be warned if they've installed an out of date Drupal version.
+  // Will also trigger indexing of profile-supplied content or feeds.
+  drupal_cron_run();
+
+  // Set default permissions per https://www.drupal.org/node/2500767.
+  $permissions = module_invoke_all('cod_default_permissions');
+  // Set user roles
+  if (isset($permissions['user_role'])) {
+  foreach($permissions['user_role'] AS $module) {
+  cod_install_roles($module);
+  }
+  }
+  // Set og roles
+  if (isset($permissions['og_role'])) {
+  foreach($permissions['og_role'] AS $module) {
+  cod_install_og_roles($module);
+  }
+  }
+  // Set user permissions
+  if (isset($permissions['user_permission'])) {
+  foreach($permissions['user_permission'] AS $module) {
+  cod_install_permissions($module);
+  }
+  }
+  // Set og permissions
+  if (isset($permissions['og_permission'])) {
+  foreach($permissions['og_permission'] AS $module) {
+  cod_install_og_permissions($module);
+  }
+  }
+
+  if (isset($messages['error'])) {
+  $output = '<p>' . (isset($messages['error']) ? t('Review the messages above before visiting <a href="@url">your new site</a>.', array('@url' => url(''))) : t('<a href="@url">Visit your new site</a>.', array('@url' => url('')))) . '</p>';
+  return $output;
+  }
+  else {
+  // Since any module can add a drupal_set_message, this can bug the user
+  // when we redirect him to the front page. For a better user experience,
+  // remove all the message that are only "notifications" message.
+  drupal_get_messages('status', TRUE);
+  drupal_get_messages('completed', TRUE);
+
+  // If we don't install drupal using Drush, redirect the user to the front
+  // page.
+  if (!drupal_is_cli()) {
+  drupal_goto('');
+  }
+  }
+   */
+}
+
+function cod_admin_permissions() {
+  //get the administrator role, we set this in the install file
+  $admin_role = \Drupal::entityTypeManager()
+    ->getStorage('user_role')
+    ->load('administrator');
+  //user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+}
+
+/**
+ * Task callback: uses Batch API to enable modules based on user selection.
+ *
+ * Creates all demo content if requested and installs optional modules that
+ * providing additional functionality to the base install.
+ */
+function cod_install_additional_modules() {
+  $modules = variable_get('cod_selected_extras', array());
+
+  // Resolve the dependencies now, so that module_enable() doesn't need
+  // to do it later for each individual module (which kills performance).
+  $files = system_rebuild_module_data();
+  $modules_sorted = array();
+  foreach ($modules as $module_key => $module) {
+    if ($files[$module]->requires) {
+      // Create a list of dependencies that haven't been installed yet.
+      $dependencies = array_keys($files[$module]->requires);
+      $dependencies = array_filter($dependencies, '_cod_filter_dependencies');
+      // Add them to the module list.
+      $modules = array_merge($modules, $dependencies);
+    }
+  }
+  $modules = array_unique($modules);
+  foreach ($modules as $module) {
+    $modules_sorted[$module] = $files[$module]->sort;
+  }
+  arsort($modules_sorted);
+
+  $operations = array();
+
+  // Enable the selected modules.
+  foreach ($modules_sorted as $module => $weight) {
+    $operations[] = array('_cod_enable_module', array($module, $files[$module]->info['name']));
+  }
+
+  $batch = array(
+    'title' => !empty($selected_extras['example_content']) ? t('Installing example content') : t('Installing additional functionality'),
+    'operations' => $operations,
+    'file' => drupal_get_path('profile', 'cod') . '/cod.install_callbacks.inc',
+  );
+
+  return $batch;
+}
+
+/**
+ * array_filter() callback used to filter out already installed dependencies.
+ */
+function _cod_filter_dependencies($dependency) {
+  static $module_handler;
+  if (!$module_handler) {
+    $module_handler = \Drupal::moduleHandler();
+  }
+  return !$module_handler->moduleExists($dependency);
+}
+
+/**
+ * Let the admin user create the first group as part of the installation process
+ */
+function cod_create_first_event() {
+  $form['cod_first_event_explanation'] = array(
+    '#markup' => '<h2>' . t('Create your first conference.') . '</h2>' . t("COD allows you to create multiple conferences and organizes content related to a particular conference, such as sessions, attendees, and announcements."),
+    '#weight' => -1,
+  );
+
+  $form['cod_first_event_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t("Conference name"),
+    '#description' => t('This is the name of your first conference. You may want to include the year or date if this is a repeating event.'),
+    '#required' => TRUE,
+    '#default_value' => t('DrupalCamp Antarctica'),
+  );
+
+  $form['cod_first_event_body'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Conference description'),
+    '#description' => t("This text will appear on the conference homepage and gives a general overview. You can always change this text later."),
+    '#required' => TRUE,
+    '#default_value' => t('DrupalCamp Antarctica is held once a year at the South Pole, with a regular attendance of around 200 penguins'),
+  );
+
+  $form['cod_first_event_modules'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Optional Features'),
+    '#description' => t("Select the optional features above that are relevant to your event."),
+    '#required' => FALSE,
+    '#options' => _cod_get_optional_modules(),
+  );
+
+  $form['cod_first_event_submit'] = array(
+    '#type'  => 'submit',
+    '#value' => t('Save and continue')
+  );
+
+  return $form;
+}
+
+/**
+ * Save the first group form
+ *
+ * @see cod_create_first_group().
+ */
+function cod_create_first_event_submit($form_id, &$form_state) {
+  $values = $form_state['values'];
+
+  $enabled_features = array();
+  if (isset($values['cod_first_event_modules'])) {
+    foreach ($values['cod_first_event_modules'] as $module_name => $module_enabled) {
+      if ($module_enabled) {
+        $enabled_features[$module_name] = $module_name;
+      }
+    }
+    //variable_set('cod_selected_extras', $enabled_features);
+  }
+
+  $first_group = new stdClass();
+  $first_group->type = 'event';
+  node_object_prepare($first_group);
+
+  $first_group->title = $values['cod_first_event_title'];
+  $first_group->body[LANGUAGE_NONE][0]['value'] = $values['cod_first_event_body'];
+  $first_group->uid = 1;
+  $first_group->language = LANGUAGE_NONE;
+  $first_group->status = 1;
+  node_save($first_group);
+
+  // Set the homepage to the first event.
+  variable_set('site_frontpage', 'node/1');
+  variable_set('cod_events_default_event', '1');
+}
+
+/**
+ * Implements hook_install().
+ */
+function cod_install() {
+  // Do not use the administration theme when editing or creating content.
+  \Drupal::configFactory()->getEditable('node.settings')
+    ->set('use_admin_theme', FALSE);
+  return;
+
+  // Create page type.
+
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+
+  $types = array(
+    array(
+      'type' => 'page',
+      'name' => t('Basic page'),
+      'base' => 'node_content',
+      'description' => t("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    node_add_body_field($type);
+  }
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  // Default page to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for page nodes by default.
+  $theme_settings = variable_get('theme_settings', array());
+  $theme_settings['toggle_node_info_page'] = FALSE;
+  variable_set('theme_settings', $theme_settings);
+
+  // Revert features to be sure everything is setup correctly.
+  // Currently disabled because we don't want devs enabling them on startup
+  $revert = array(
+    'cod_wysiwyg' => array('ckeditor_profile'),
+  );
+  features_revert($revert);
+
+  node_access_rebuild(FALSE);
+
+  // The installer requires that the system theme settings form
+  // be submitted in order for its themes' settings to be properly set
+  // For more background, see https://www.drupal.org/node/1776730.
+  module_load_include('inc', 'system', 'system.admin');
+  // Enable the Origins theme and set it as the default.
+  $cod_themes = array('omega', 'pisces', 'adminimal', 'fisherman');
+  foreach ($cod_themes as $theme_name) {
+    $form_state = form_state_defaults();
+    $form_state['build_info']['args'][0] = $theme_name;
+    $form_state['values'] = array();
+    drupal_form_submit('system_theme_settings', $form_state);
+  }
+}
+
+/**
+ * Enable the Libraries module.
+ */
+function cod_update_7001() {
+  $module_list = array('libraries');
+  module_enable($module_list);
+  return array();
+}
+
+/**
+ * Enable new dependencies for COD to work properly.
+ */
+function cod_update_7002() {
+  $module_list = array('inline_entity_form', 'views_autorefresh', 'views_datasource');
+  module_enable($module_list);
+  return array();
+}
+
+/**
+ * Switch from Seven to Adminimal admin theme.
+ */
+function cod_update_7003() {
+  $module_list = array('adminimal', 'adminimal_admin_menu');
+  module_enable($module_list);
+  variable_set('admin_theme', 'adminimal');
+
+  // Enable default settings for jquery_update
+  variable_set('jquery_update_compression_type', 'min');
+  variable_set('jquery_update_jquery_admin_version', '1.7');
+  variable_set('jquery_update_jquery_version', '1.8');
+  return array();
+}
+
+/**
+ * Make sure Adminimal and Pisces are enabled if they are set as themes.
+ */
+function cod_update_7004() {
+  //Verify adminimal is enabled if its set as admin theme.
+  if (variable_get('admin_theme', '') == 'adminimal') {
+    $admin_theme = 'adminimal';
+    theme_enable(array($admin_theme));
+    module_enable(array('adminimal_admin_menu'));
+    theme_disable(array('seven'));
+  }
+  // Verify pisces is enabled if its the default theme.
+  if (variable_get('theme_default', '') == 'pisces') {
+    theme_enable(array('pisces'));
+    theme_disable(array('bartik'));
+  }
+  return array();
+}
+
+/**
+ * Set Fisherman as replacement Administration theme for Adminimal.
+ */
+function cod_update_7006() {
+  //Verify that Adminimal is set as admin theme, then switch to Fisherman.
+  if (variable_get('admin_theme', '') == 'adminimal') {
+    $admin_theme = 'fisherman';
+    theme_enable(array($admin_theme));
+    variable_set('admin_theme', $admin_theme);
+  }
+  return array();
+}
+
+/**
+ * Update foreign keys where necessary.
+ * See https://www.drupal.org/node/1969018 for more info.
+ */
+function cod_update_7007() {
+  // Load the base table configuration from the cache.
+  $base_tables = variable_get('entityreference:base-tables', array());
+
+  foreach (field_info_fields() as $field_name => $field) {
+
+    if ($field['type'] != 'entityreference') {
+      // Not an entity reference field.
+      continue;
+    }
+
+    // Read in the field config.
+    $field_name = field_read_field($field['field_name']);
+
+    // Create a foreign key to the target entity type base type, if available.
+    $entity_type = $field_name['settings']['target_type'];
+    if (isset($base_tables[$entity_type])) {
+      list($base_table, $id_column) = $base_tables[$entity_type];
+      $schema['foreign keys'][$base_table] = array(
+        'table' => $base_table,
+        'columns' => array('target_id' => $id_column),
+      );
+    }
+
+    // Update foreign keys to actually contain the proper entity foreign keys
+    // if they differ.
+    if ($field_name['foreign keys'] != $schema['foreign keys']) {
+      $field_name['foreign keys'] = $schema['foreign keys'];
+      field_update_field($field_name);
+    }
+  }
+}

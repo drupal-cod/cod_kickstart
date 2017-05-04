@@ -36,9 +36,18 @@
     "drupal/page_manager": "4.x-dev",
     "drupal/quicktabs": "~3.0",
     "drupal/rules": "~3.0",
-    "drupal/token": "~1.0"
+    "drupal/token": "~1.0",
+    "drupal/omega": "5.x-dev"
   },
   "extra": {
+    "installer-paths": {
+      "html/core": ["type:drupal-core"],
+      "html/libraries/{$name}": ["type:drupal-library"],
+      "html/modules/contrib/{$name}": ["type:drupal-module"],
+      "html/profiles/{$name}": ["type:drupal-profile"],
+      "html/themes/contrib/{$name}": ["type:drupal-theme"],
+      "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
     "patches": {
       "drupal/rules": {
         "https://www.drupal.org/node/2849779 Implement missing PluginDefinitionInterface methods": "https://www.drupal.org/files/issues/rules-fix-tests.patch"

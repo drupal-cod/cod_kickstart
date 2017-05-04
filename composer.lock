@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a6920a55dd092afdaad4f1a6da80addb",
-    "content-hash": "b8c43667840281392e68e1a8d1ad4f1c",
+    "hash": "587f337f31cc9572fff08c7e823dd626",
+    "content-hash": "6a2bdc6fb6b0401286d3eecd157fec91",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,16 +61,16 @@
         },
         {
             "name": "caxy/php-htmldiff",
-            "version": "v0.1.3",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/php-htmldiff.git",
-                "reference": "fe3af15ac85138d31ec7dd674a9840139327d7c0"
+                "reference": "9b115a83d49c636d6bae8ffce15b0e1962cb2ed7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/fe3af15ac85138d31ec7dd674a9840139327d7c0",
-                "reference": "fe3af15ac85138d31ec7dd674a9840139327d7c0",
+                "url": "https://api.github.com/repos/caxy/php-htmldiff/zipball/9b115a83d49c636d6bae8ffce15b0e1962cb2ed7",
+                "reference": "9b115a83d49c636d6bae8ffce15b0e1962cb2ed7",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +80,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "~1.0",
-                "phpunit/phpunit": "~4.8"
+                "phpunit/phpunit": "~5.0"
             },
             "suggest": {
                 "doctrine/cache": "Used for caching the calculated diffs using a Doctrine Cache Provider"
@@ -113,7 +113,7 @@
                 "diff",
                 "html"
             ],
-            "time": "2016-07-21 15:37:40"
+            "time": "2017-05-02 21:16:54"
         },
         {
             "name": "commerceguys/addressing",
@@ -916,16 +916,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.3.1",
+            "version": "8.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "53326f9503e5e9e406fab22e4fbae6ddb706f7be"
+                "reference": "82c432cfe728458538d4826c9c4be57dcf35443b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/53326f9503e5e9e406fab22e4fbae6ddb706f7be",
-                "reference": "53326f9503e5e9e406fab22e4fbae6ddb706f7be",
+                "url": "https://api.github.com/repos/drupal/core/zipball/82c432cfe728458538d4826c9c4be57dcf35443b",
+                "reference": "82c432cfe728458538d4826c9c4be57dcf35443b",
                 "shasum": ""
             },
             "require": {
@@ -958,6 +958,9 @@
                 "twig/twig": "^1.23.1",
                 "zendframework/zend-diactoros": "~1.1",
                 "zendframework/zend-feed": "~2.4"
+            },
+            "conflict": {
+                "drush/drush": "<8.1.10"
             },
             "replace": {
                 "drupal/action": "self.version",
@@ -1073,6 +1076,36 @@
                 "symfony/css-selector": "~2.8"
             },
             "type": "drupal-core",
+            "extra": {
+                "installer-paths": {
+                    "html/core": [
+                        "type:drupal-core"
+                    ],
+                    "html/libraries/{$name}": [
+                        "type:drupal-library"
+                    ],
+                    "html/modules/contrib/{$name}": [
+                        "type:drupal-module"
+                    ],
+                    "html/profiles/{$name}": [
+                        "type:drupal-profile"
+                    ],
+                    "html/themes/contrib/{$name}": [
+                        "type:drupal-theme"
+                    ],
+                    "drush/contrib/{$name}": [
+                        "type:drupal-drush"
+                    ]
+                },
+                "patches": {
+                    "drupal/rules": {
+                        "https://www.drupal.org/node/2849779 Implement missing PluginDefinitionInterface methods": "https://www.drupal.org/files/issues/rules-fix-tests.patch"
+                    },
+                    "drupal/core": {
+                        "Pluggable calendar backend": "https://www.drupal.org/files/1811912-calendar-26.patch"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Drupal\\Core\\": "lib/Drupal/Core",
@@ -1094,7 +1127,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2017-04-19 16:07:22"
+            "time": "2017-05-03 17:12:42"
         },
         {
             "name": "drupal/ctools",
@@ -1855,6 +1888,55 @@
             "time": "2017-01-13 12:41:23"
         },
         {
+            "name": "drupal/omega",
+            "version": "dev-5.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/omega",
+                "reference": "df96ba39b5c0fb469784ab2f6540dc009bd7f53b"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "branch-alias": {
+                    "dev-5.x": "5.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-5.0-alpha7+44-dev",
+                    "datestamp": "1476137039"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "fubhy",
+                    "homepage": "https://www.drupal.org/user/761344"
+                },
+                {
+                    "name": "himerus",
+                    "homepage": "https://www.drupal.org/user/159141"
+                },
+                {
+                    "name": "miche",
+                    "homepage": "https://www.drupal.org/user/181494"
+                },
+                {
+                    "name": "splatio",
+                    "homepage": "https://www.drupal.org/user/1012210"
+                }
+            ],
+            "homepage": "https://www.drupal.org/project/omega",
+            "support": {
+                "source": "http://cgit.drupalcode.org/omega"
+            },
+            "time": "2016-10-10 22:01:23"
+        },
+        {
             "name": "drupal/page_manager",
             "version": "dev-4.x",
             "source": {
@@ -2057,7 +2139,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/quicktabs-8.x-3.0-alpha1.zip",
-                "reference": null,
+                "reference": "8.x-3.0-alpha1",
                 "shasum": "e00354d4b15abf77eec2b013df065ca210c27793"
             },
             "require": {
@@ -2147,6 +2229,9 @@
                 "drupal": {
                     "version": "8.x-3.0-alpha2",
                     "datestamp": "1475246339"
+                },
+                "patches_applied": {
+                    "https://www.drupal.org/node/2849779 Implement missing PluginDefinitionInterface methods": "https://www.drupal.org/files/issues/rules-fix-tests.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2243,7 +2328,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/typed_data-8.x-1.0-alpha1.zip",
-                "reference": null,
+                "reference": "8.x-1.0-alpha1",
                 "shasum": "69b7230546bfea53d57f8923183e964137f5a456"
             },
             "require": {
@@ -2281,7 +2366,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/webform",
-                "reference": "331ab9f71e62fe93c4ddb05ad8f19a89eb213ba7"
+                "reference": "23255ac27155f6a005f48fe322e146b057ac1f2c"
             },
             "require": {
                 "drupal/core": "*"
@@ -2292,8 +2377,8 @@
                     "dev-5.x": "5.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-5.0-beta12+18-dev",
-                    "datestamp": "1493602744"
+                    "version": "8.x-5.0-beta12+21-dev",
+                    "datestamp": "1493845384"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2345,7 +2430,7 @@
                 "source": "http://cgit.drupalcode.org/webform",
                 "issues": "https://drupal.org/project/issues/webform"
             },
-            "time": "2017-05-02 01:26:30"
+            "time": "2017-05-04 11:22:36"
         },
         {
             "name": "easyrdf/easyrdf",
@@ -4554,7 +4639,8 @@
         "drupal/field_collection": 20,
         "drupal/webform": 20,
         "drupal/og": 20,
-        "drupal/page_manager": 20
+        "drupal/page_manager": 20,
+        "drupal/omega": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
