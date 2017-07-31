@@ -59,7 +59,7 @@
     }
   },
     "require": {
-      "acquia/blt": "^8.3",
+      "acquia/blt": "^8.9",
       "drupal-cod/program": "dev-master",
       "drupal-cod/sponsors": "dev-master",
       "drupal-cod/event": "dev-master",
