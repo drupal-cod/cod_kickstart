@@ -63,11 +63,12 @@
       "drupal-cod/program": "dev-master",
       "drupal-cod/sponsors": "dev-master",
       "drupal-cod/event": "dev-master",
-      "drupal-cod/ticket": "dev-master"
+      "drupal-cod/ticket": "dev-master",
+      "drupal/og": "1.x-dev"
     },
     "require-dev": {
-    "geerlingguy/drupal-vm": "~4.3"
-  },
+      "geerlingguy/drupal-vm": "~4.3"
+    },
     "extra": {
         "enable-patching": true,
         "installer-paths": {

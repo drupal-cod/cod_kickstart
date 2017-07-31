@@ -771,5 +771,5 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
   require $_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR'] . '/loc_cod_dd.inc';
 }
 // </DDSETTINGS>
-$settings['install_profile'] = 'lightning';
+$settings['install_profile'] = 'cod';
 require DRUPAL_ROOT . "/../vendor/acquia/blt/settings/blt.settings.php";
