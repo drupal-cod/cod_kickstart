@@ -3,7 +3,7 @@ project:
   prefix: COD
   human_name: 'COD - Conference Organizing Distribution'
   profile:
-    name: lightning
+    name: cod
   local:
     protocol: http
     hostname: 'local.${project.machine_name}.com'
@@ -16,6 +16,22 @@ drush:
     local: self
     ci: self
   default_alias: '${drush.aliases.local}'
+modules:
+  local:
+    enable: [dblog, devel, seckit, views_ui]
+    uninstall: [acsf, acquia_connector, shield]
+  ci:
+    enable: {  }
+    uninstall: [acquia_connector, shield]
+  dev:
+    enable: [shield, shield]
+    uninstall: [acquia_connector]
+  test:
+    enable: [shield, shield]
+    uninstall: [acquia_connector, devel, views_ui]
+  prod:
+    enable: [shield, shield]
+    uninstall: [acquia_connector, devel, views_ui]
 target-hooks:
   frontend-setup:
     dir: '${docroot}'
@@ -35,20 +51,5 @@ target-hooks:
   post-deploy:
     dir: '${docroot}'
     command: 'echo ''No post-deploy build configured.'''
-import: null
-modules:
-  local:
-    enable: [dblog, devel, seckit, views_ui]
-    uninstall: [acsf, acquia_connector, shield]
-  ci:
-    enable: {  }
-    uninstall: [acquia_connector, shield]
-  dev:
-    enable: [shield]
-    uninstall: [acquia_connector]
-  test:
-    enable: [shield]
-    uninstall: [acquia_connector, devel, views_ui]
-  prod:
-    enable: [shield]
-    uninstall: [acquia_connector, devel, views_ui]
+behat:
+  web-driver: selenium
