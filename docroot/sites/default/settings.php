@@ -773,3 +773,8 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 // </DDSETTINGS>
 $settings['install_profile'] = 'cod';
 require DRUPAL_ROOT . "/../vendor/acquia/blt/settings/blt.settings.php";
+
+/**
+ * Environment Specific Customizations based on the Environment Indicator.
+ */
+require DRUPAL_ROOT . "/sites/default/settings/environment.settings.php";
