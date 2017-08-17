@@ -6,7 +6,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "acquia/blt": "^8.9.0",
+    "acquia/blt": "^8.9.1",
     "acquia/lightning": "^2.1.5",
     "drush/drush": "^8.1.8",
     "cweagans/composer-patches": "^1.6.0",
