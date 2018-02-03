@@ -25,6 +25,7 @@
         "geerlingguy/drupal-vm": "~4.3"
     },
     "require-dev": {
+        "drupal/console": "^1.0.0-rc13"
     },
     "repositories": {
         "drupal": {
