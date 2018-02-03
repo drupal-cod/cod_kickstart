@@ -6,7 +6,7 @@ vagrant_machine_name: cod
 vagrant_ip: 192.168.165.211
 
 # Use Ubuntu 14.04 LTS to more closely match Acquia Cloud environment.
-vagrant_box: geerlingguy/ubuntu1404
+vagrant_box: geerlingguy/ubuntu1604
 
 # Set drupal_site_name to the project's human-readable name.
 drupal_site_name: "COD - Conference Organizing Distribution"
