@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a39b737f8b46fa2fa0d10e23dc260896",
+    "content-hash": "bdf8468810ef834a9eaea92618d7bbfa",
     "packages": [
         {
             "name": "acquia/blt",
@@ -6343,6 +6343,45 @@
             "time": "2017-06-03T02:28:16+00:00"
         },
         {
+            "name": "geerlingguy/drupal-vm",
+            "version": "4.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geerlingguy/drupal-vm.git",
+                "reference": "0ca883a9fd413b3a251c5a144167f7500cf884b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geerlingguy/drupal-vm/zipball/0ca883a9fd413b3a251c5a144167f7500cf884b4",
+                "reference": "0ca883a9fd413b3a251c5a144167f7500cf884b4",
+                "shasum": ""
+            },
+            "type": "vm",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Geerling",
+                    "homepage": "http://www.jeffgeerling.com"
+                },
+                {
+                    "name": "Oskar Schöldström",
+                    "homepage": "http://oxy.fi"
+                }
+            ],
+            "description": "A VM for local Drupal development, built with Vagrant + Ansible",
+            "homepage": "https://www.drupalvm.com",
+            "keywords": [
+                "drupal",
+                "vagrant",
+                "virtual machine",
+                "vm"
+            ],
+            "time": "2018-01-30T22:23:43+00:00"
+        },
+        {
             "name": "grasmash/drupal-security-warning",
             "version": "1.1.1",
             "source": {
@@ -11206,45 +11245,6 @@
                 "scraper"
             ],
             "time": "2017-11-19T08:45:40+00:00"
-        },
-        {
-            "name": "geerlingguy/drupal-vm",
-            "version": "4.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geerlingguy/drupal-vm.git",
-                "reference": "0ca883a9fd413b3a251c5a144167f7500cf884b4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geerlingguy/drupal-vm/zipball/0ca883a9fd413b3a251c5a144167f7500cf884b4",
-                "reference": "0ca883a9fd413b3a251c5a144167f7500cf884b4",
-                "shasum": ""
-            },
-            "type": "vm",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeff Geerling",
-                    "homepage": "http://www.jeffgeerling.com"
-                },
-                {
-                    "name": "Oskar Schöldström",
-                    "homepage": "http://oxy.fi"
-                }
-            ],
-            "description": "A VM for local Drupal development, built with Vagrant + Ansible",
-            "homepage": "https://www.drupalvm.com",
-            "keywords": [
-                "drupal",
-                "vagrant",
-                "virtual machine",
-                "vm"
-            ],
-            "time": "2018-01-30T22:23:43+00:00"
         },
         {
             "name": "instaclick/php-webdriver",
