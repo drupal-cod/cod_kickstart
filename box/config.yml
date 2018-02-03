@@ -3,10 +3,10 @@ vagrant_hostname: local.cod.com
 vagrant_machine_name: cod
 
 # Set the IP address so it doesn't conflict with other Drupal VM instances.
-vagrant_ip: 192.168.165.211
+vagrant_ip: 192.168.187.247
 
-# Use Ubuntu 14.04 LTS to more closely match Acquia Cloud environment.
-vagrant_box: geerlingguy/ubuntu1404
+# Use Ubuntu 16.04 LTS to match Acquia Cloud environments.
+vagrant_box: geerlingguy/ubuntu1604
 
 # Set drupal_site_name to the project's human-readable name.
 drupal_site_name: "COD - Conference Organizing Distribution"
@@ -41,10 +41,11 @@ drupal_install_site: false
 configure_drush_aliases: false
 
 # This is required for front-end building tools.
-nodejs_version: "4.x"
+nodejs_version: "6.x"
 nodejs_npm_global_packages:
   - name: bower
   - name: gulp-cli
+  - name: yarn
 nodejs_install_npm_user: "{{ drupalvm_user }}"
 npm_config_prefix: "/home/{{ drupalvm_user }}/.npm-global"
 installed_extras:
@@ -55,8 +56,8 @@ installed_extras:
   - selenium
   - xdebug
 
-# Use PHP 5.6.
-php_version: "5.6"
+# PHP 7.1
+php_version: "7.1"
 php_packages_extra:
   - "php{{ php_version }}-bz2"
   - "php{{ php_version }}-imagick"

@@ -1,162 +1,159 @@
 {
-  "name": "drupal-cod/cod_kickstart",
-  "description": "A reference architecture for conference sites built with COD.",
-  "type": "project",
-  "license": "gpl",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "acquia/blt": "^8.9.1",
-    "acquia/lightning": "^2.1.5",
-    "drush/drush": "^8.1.8",
-    "cweagans/composer-patches": "^1.6.0",
-    "drupal/config_split": "^1.0",
-    "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
-    "drupal/acquia_connector": "^1.5.0",
-    "drupal/cog": "^1.0.0",
-    "drupal/memcache": "2.x-dev",
-    "drupal/seckit": "^1.0.0-alpha2",
-    "drupal/security_review": "*",
-    "drupal/shield": "^1.0.0",
-    "drupal/entity_pilot": "1.x-dev#61fe90228a903ef0a71ec054646f38b9bce67ce7",
-    "drupal/entity_pilot_git": "1.x-dev#0814569ba9e1a815ff9956399f183127303214fa",
-    "drupal/console": "^1.0.0-rc16",
-    "doctrine/collections": "1.3.0",
-    "drupal/environment_indicator": "^3.0",
-    "drupal/admin_toolbar": "^1.19",
-    "drupal/adminimal_admin_toolbar": "^1.5",
-    "drupal-cod/program": "dev-master",
-    "drupal-cod/sponsors": "dev-master",
-    "drupal-cod/event": "dev-master",
-    "drupal-cod/ticket": "dev-master",
-    "drupal/og": "dev-master"
-
-  },
-  "require-dev": {
-    "drupal/devel": "^1.0.0-alpha1",
-    "geerlingguy/drupal-vm": "~4.3",
-    "jakoch/phantomjs-installer": "^2.1.1-p07",
-    "drupal/drupal-extension": "~3.2.0"
-  },
-  "repositories": {
-    "drupal": {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
+    "name": "drupal-cod/cod_kickstart",
+    "description": "A reference architecture for conference sites built with COD.",
+    "type": "project",
+    "license": "gpl",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "acquia/blt": "^8.9.1",
+        "acquia/lightning": "3.0.1",
+        "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
+        "drupal/acquia_connector": "^1.5.0",
+        "drupal/cog": "^1.0.0",
+        "drupal/seckit": "^1.0.0-alpha2",
+        "drupal/security_review": "*",
+        "drupal/shield": "^1.0.0",
+        "doctrine/collections": "1.3.0",
+        "drupal/environment_indicator": "^3.0",
+        "drupal/admin_toolbar": "^1.19",
+        "drupal/adminimal_admin_toolbar": "^1.5",
+        "drupal-cod/program": "dev-master",
+        "drupal-cod/sponsors": "dev-master",
+        "drupal-cod/event": "dev-master",
+        "drupal-cod/ticket": "dev-master",
+        "geerlingguy/drupal-vm": "~4.3"
     },
-    "0": {
-      "type": "package",
-      "package": {
-        "name": "drupal-cod/program",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/drupal-cod/program.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
+    "require-dev": {
     },
-    "1": {
-      "type": "package",
-      "package": {
-        "name": "drupal-cod/sponsors",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/drupal-cod/sponsors.git",
-          "type": "git",
-          "reference": "master"
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "0": {
+            "type": "package",
+            "package": {
+                "name": "drupal-cod/program",
+                "type": "drupal-module",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/drupal-cod/program.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        "1": {
+            "type": "package",
+            "package": {
+                "name": "drupal-cod/sponsors",
+                "type": "drupal-module",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/drupal-cod/sponsors.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        "2": {
+            "type": "package",
+            "package": {
+                "name": "drupal-cod/event",
+                "type": "drupal-module",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/drupal-cod/event.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        "3": {
+            "type": "package",
+            "package": {
+                "name": "drupal-cod/ticket",
+                "type": "drupal-module",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/drupal-cod/ticket.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        "4": {
+            "type": "package",
+            "package": {
+                "name": "drupal/og",
+                "type": "drupal-module",
+                "version": "master",
+                "source": {
+                    "url": "https://github.com/Gizra/og.git",
+                    "type": "git",
+                    "reference": "8.x-1.x"
+                }
+            }
         }
-      }
     },
-    "2": {
-      "type": "package",
-      "package": {
-        "name": "drupal-cod/event",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/drupal-cod/event.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
-    },
-    "3": {
-      "type": "package",
-      "package": {
-        "name": "drupal-cod/ticket",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/drupal-cod/ticket.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
-    },
-    "4" : {
-      "type": "package",
-      "package": {
-        "name": "drupal/og",
-        "type": "drupal-module",
-        "version": "master",
-        "source": {
-          "url": "https://github.com/Gizra/og.git",
-          "type": "git",
-          "reference": "8.x-1.x"
-        }
-      }
+    "extra": {
+        "blt": {
+            "update": true
+        },
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "patches": [],
+        "enable-patching": true,
+        "merge-plugin": {
+            "require": [
+                "vendor/acquia/blt/composer.required.json"
+            ],
+            "include": [
+                "blt/composer.overrides.json"
+            ],
+            "merge-extra": true,
+            "merge-extra-deep": true,
+            "merge-scripts": true,
+            "replace": false,
+            "ignore-duplicates": true
+        },
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ]
     }
-  },
-  "extra": {
-    "blt": {
-      "update": true
-    },
-    "installer-paths": {
-      "docroot/core": [
-        "type:drupal-core"
-      ],
-      "docroot/modules/contrib/{$name}": [
-        "type:drupal-module"
-      ],
-      "docroot/modules/custom/{$name}": [
-        "type:drupal-custom-module"
-      ],
-      "docroot/profiles/contrib/{$name}": [
-        "type:drupal-profile"
-      ],
-      "docroot/profiles/custom/{$name}": [
-        "type:drupal-custom-profile"
-      ],
-      "docroot/themes/contrib/{$name}": [
-        "type:drupal-theme"
-      ],
-      "docroot/themes/custom/{$name}": [
-        "type:drupal-custom-theme"
-      ],
-      "docroot/libraries/{$name}": [
-        "type:drupal-library"
-      ],
-      "drush/contrib/{$name}": [
-        "type:drupal-drush"
-      ]
-    },
-    "patches": {
-    },
-    "enable-patching": true,
-    "merge-plugin": {
-      "require": [
-        "vendor/acquia/blt/composer.required.json"
-      ],
-      "include": [
-        "blt/composer.overrides.json"
-      ],
-      "merge-extra": true,
-      "merge-extra-deep": true,
-      "merge-scripts": true,
-      "replace": false,
-      "ignore-duplicates": true
-    }
-  }
 }
