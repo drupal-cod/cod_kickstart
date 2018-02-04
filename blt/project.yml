@@ -3,7 +3,7 @@ project:
   prefix: COD
   human_name: 'COD - Conference Organizing Distribution'
   profile:
-    name: cod
+    name: cod_profile
   local:
     protocol: http
     hostname: 'local.${project.machine_name}.com'
