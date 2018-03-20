@@ -1,0 +1,7 @@
+local:
+    host: local.cod.com
+    options: {  }
+    root: /var/www/cod/docroot
+    uri: 'http://local.cod.com'
+    user: vagrant
+    ssh: { options: '-o PasswordAuthentication=no -i $HOME/.vagrant.d/insecure_private_key' }
