@@ -19,7 +19,7 @@ drush:
 modules:
   local:
     enable: [dblog, devel, seckit, views_ui]
-    uninstall: [acsf, acquia_connector, shield]
+    uninstall: [acquia_connector, shield]
   ci:
     enable: {  }
     uninstall: [acquia_connector, shield]
@@ -55,3 +55,5 @@ target-hooks:
     command: 'echo ''No post-deploy build configured.'''
 behat:
   web-driver: selenium
+  paths:
+    - '${repo.root}/tests/behat'

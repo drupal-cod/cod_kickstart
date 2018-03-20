@@ -6,8 +6,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "acquia/blt": "^8.9.1",
-        "acquia/lightning": "3.0.1",
+        "acquia/blt": "9.0.5",
+        "acquia/lightning": "^3.0.1",
         "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
         "drupal/acquia_connector": "^1.5.0",
         "drupal/cog": "^1.0.0",
@@ -21,11 +21,11 @@
         "drupal-cod/program": "dev-master",
         "drupal-cod/sponsors": "dev-master",
         "drupal-cod/event": "dev-master",
-        "drupal-cod/ticket": "dev-master",
-        "geerlingguy/drupal-vm": "~4.3"
+        "drupal-cod/ticket": "dev-master"
     },
     "require-dev": {
-        "drupal/console": "^1.0.0-rc13"
+        "drupal/console": "^1.0.0-rc13",
+        "geerlingguy/drupal-vm": "^4.8"
     },
     "repositories": {
         "drupal": {
