@@ -57,3 +57,11 @@ behat:
   web-driver: selenium
   paths:
     - '${repo.root}/tests/behat'
+dev-modules:
+  path: ../../../dev-modules
+  link:
+    - event
+    - program
+    - sponsors
+    - ticket
+    - group

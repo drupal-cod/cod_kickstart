@@ -1,0 +1,7 @@
+environment: local
+drush:
+  default_alias: cod.local
+  aliases:
+    local: cod.local
+vm:
+  enable: true

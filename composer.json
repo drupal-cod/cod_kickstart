@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "acquia/blt": "9.0.5",
+        "acquia/blt": "9.0.6",
         "acquia/lightning": "^3.0.1",
         "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
         "drupal/acquia_connector": "^1.5.0",
@@ -100,6 +100,10 @@
                     "reference": "8.x-1.x"
                 }
             }
+        },
+        "blt": {
+            "type": "vcs",
+            "url": "https://github.com/japerry/blt.git"
         }
     },
     "extra": {
@@ -141,7 +145,8 @@
         "enable-patching": true,
         "merge-plugin": {
             "require": [
-                "vendor/acquia/blt/composer.required.json"
+                "blt/composer.required.json",
+                "blt/composer.suggested.json"
             ],
             "include": [
                 "blt/composer.overrides.json"
