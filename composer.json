@@ -7,11 +7,12 @@
     "prefer-stable": true,
     "require": {
         "acquia/blt": "9.0.6",
-        "acquia/lightning": "^3.0.1",
+        "acquia/lightning": "^3.1.1",
         "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
         "drupal/acquia_connector": "^1.5.0",
         "drupal/cog": "^1.0.0",
         "drupal/core": "^8.5.3",
+        "drupal/lightning_core": "^2.5",
         "drupal/seckit": "^1.0.0-alpha2",
         "drupal/security_review": "*",
         "drupal/shield": "^1.0.0",
