@@ -11,6 +11,7 @@
         "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
         "drupal/acquia_connector": "^1.5.0",
         "drupal/cog": "^1.0.0",
+        "drupal/core": "^8.5.3",
         "drupal/seckit": "^1.0.0-alpha2",
         "drupal/security_review": "*",
         "drupal/shield": "^1.0.0",
@@ -19,7 +20,7 @@
         "drupal/admin_toolbar": "^1.19",
         "drupal/adminimal_admin_toolbar": "^1.5",
         "drupal-cod/program": "dev-master",
-        "drupal-cod/sponsors": "dev-master",
+        "drupal-cod/sponsor": "dev-master",
         "drupal-cod/event": "dev-master",
         "drupal-cod/ticket": "dev-master"
     },
@@ -52,11 +53,11 @@
         "1": {
             "type": "package",
             "package": {
-                "name": "drupal-cod/sponsors",
+                "name": "drupal-cod/sponsor",
                 "type": "drupal-module",
                 "version": "master",
                 "source": {
-                    "url": "https://github.com/drupal-cod/sponsors.git",
+                    "url": "https://github.com/drupal-cod/sponsor.git",
                     "type": "git",
                     "reference": "master"
                 }
