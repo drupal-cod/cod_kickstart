@@ -1,0 +1,14 @@
+uuid: 9b3bf0f8-9803-4455-bd49-92bdd54f5c38
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+id: conference-outsider
+label: Outsider
+weight: -101
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: true
+permissions: {  }

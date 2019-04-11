@@ -1,0 +1,17 @@
+uuid: 5f6d43ed-975a-45ea-811d-2505a7238d9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.landing_page_creator
+id: conference-ada4f2781
+label: 'Landing page creator'
+weight: 4
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

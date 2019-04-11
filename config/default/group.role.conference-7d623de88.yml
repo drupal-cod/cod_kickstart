@@ -1,0 +1,17 @@
+uuid: 850662ca-233e-4377-b320-f08e123dca00
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.landing_page_reviewer
+id: conference-7d623de88
+label: 'Landing page reviewer'
+weight: 5
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

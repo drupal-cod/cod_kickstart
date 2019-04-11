@@ -1,0 +1,17 @@
+uuid: 0ad85379-2650-4390-ab94-e8d52ae4d554
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.page_creator
+id: conference-09fde3543
+label: 'Basic page creator'
+weight: 2
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

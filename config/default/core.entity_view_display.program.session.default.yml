@@ -1,0 +1,38 @@
+uuid: de799b95-2c60-4cc8-a4ea-06286d7a486a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.program.session.field_experience_level
+    - field.field.program.session.field_files
+    - field.field.program.session.field_slides_link
+    - field.field.program.session.field_status
+    - program.program_type.session
+  module:
+    - user
+id: program.session.default
+targetEntityType: program
+bundle: session
+mode: default
+content:
+  name:
+    label: above
+    type: string
+    weight: -4
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_experience_level: true
+  field_files: true
+  field_slides_link: true
+  field_status: true
+  scheduled_publication: true

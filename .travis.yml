@@ -1,8 +1,10 @@
-# Note that the example .travis.yml file for child projects lives in /install.
-sudo: false
+sudo: true
 language: php
-dist: trusty
+dist: xenial
 
+# Adjust the version of PHP to match your production environment.
+# Making this version number greater than the production environment can have unintended consequences
+# including a non-functional prod environment.
 php:
   - 7.1
 
@@ -26,10 +28,14 @@ cache:
   - "$HOME/.drush/cache"
   - "$HOME/.npm"
   - "$HOME/.nvm"
-  - "vendor"
-  # Cache front end dependecies to dramatically improve build time.
+  - ".rules"
+  # Cache front end dependencies to dramatically improve build time.
   # - "docroot/themes/custom/mytheme/node_modules"
   # - "docroot/themes/custom/mytheme/bower_components"
+
+services:
+- mysql
+- xvfb
 
 addons:
   ssh_known_hosts:
@@ -44,9 +50,6 @@ notifications:
 before_install:
   # Disable xdebug.
   - phpenv config-rm xdebug.ini
-  # Increase Memory Limit
-  - phpenv config-add travis.php.ini
-  - echo 'sendmail_path = "/bin/true"' | sudo tee "/home/travis/.phpenv/versions/`php -i | grep "PHP Version" | head -n 1 | grep -o -P '\d+\.\d+\.\d+.*'`/etc/conf.d/sendmail.ini"
   - composer self-update
   - composer validate --no-check-all --ansi
   - composer install
@@ -58,4 +61,27 @@ install:
   - source ${BLT_DIR}/scripts/travis/setup_project
 
 script:
+  # Uncomment these lines to test database updates using live content.
+  # - blt drupal:sync:default:site
   - source ${BLT_DIR}/scripts/travis/run_tests
+
+# The version below MUST match the php version indicated at the top of this file, otherwise the artifact won't build.
+deploy:
+   - provider: script
+     script: "${BLT_DIR}/scripts/travis/deploy_branch"
+     skip_cleanup: true
+     on:
+       branch: develop
+       php: 7.1
+   - provider: script
+     script: "${BLT_DIR}/scripts/travis/deploy_branch"
+     skip_cleanup: true
+     on:
+       branch: master
+       php: 7.1
+   - provider: script
+     script: "${BLT_DIR}/scripts/travis/deploy_tag"
+     skip_cleanup: true
+     on:
+       tags: true
+       php: 7.1

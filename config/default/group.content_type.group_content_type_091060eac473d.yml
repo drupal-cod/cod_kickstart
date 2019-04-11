@@ -1,0 +1,19 @@
+uuid: 1592da15-3464-48f4-b658-dcf951038023
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+    - node.type.landing_page
+  module:
+    - gnode
+    - node
+id: group_content_type_091060eac473d
+label: 'Conference: Group node (Landing page)'
+description: 'Adds <em class="placeholder">Landing page</em> content to groups both publicly and privately.'
+group_type: conference
+content_plugin: 'group_node:landing_page'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

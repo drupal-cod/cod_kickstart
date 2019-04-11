@@ -1,0 +1,17 @@
+uuid: 35469bfc-d206-4888-b63f-1578a1464a8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.page_reviewer
+id: conference-a0da73fc7
+label: 'Basic page reviewer'
+weight: 3
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

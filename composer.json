@@ -6,8 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "acquia/blt": "9.0.6",
-        "acquia/lightning": "^3.0.1",
+        "acquia/blt": "^9.2",
         "drupal/config_ignore": "2.x-dev#5fcb8501ca8eb0f4ef7253282650607c343e86f5",
         "drupal/acquia_connector": "^1.5.0",
         "drupal/cog": "^1.0.0",
@@ -18,14 +17,13 @@
         "drupal/environment_indicator": "^3.0",
         "drupal/admin_toolbar": "^1.19",
         "drupal/adminimal_admin_toolbar": "^1.5",
-        "drupal-cod/program": "dev-master",
-        "drupal-cod/sponsors": "dev-master",
-        "drupal-cod/event": "dev-master",
-        "drupal-cod/ticket": "dev-master"
+        "drupal/program": "1.x-dev",
+        "drupal/sponsor": "1.x-dev",
+        "drupal/event": "1.x-dev",
+        "drupal/ticket": "1.x-dev"
     },
     "require-dev": {
-        "drupal/console": "^1.0.0-rc13",
-        "geerlingguy/drupal-vm": "^4.8"
+        "drupal/console": "^1.0.0-rc13"
     },
     "repositories": {
         "drupal": {
@@ -35,75 +33,6 @@
         "asset-packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        "0": {
-            "type": "package",
-            "package": {
-                "name": "drupal-cod/program",
-                "type": "drupal-module",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/drupal-cod/program.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        "1": {
-            "type": "package",
-            "package": {
-                "name": "drupal-cod/sponsors",
-                "type": "drupal-module",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/drupal-cod/sponsors.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        "2": {
-            "type": "package",
-            "package": {
-                "name": "drupal-cod/event",
-                "type": "drupal-module",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/drupal-cod/event.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        "3": {
-            "type": "package",
-            "package": {
-                "name": "drupal-cod/ticket",
-                "type": "drupal-module",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/drupal-cod/ticket.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-        "4": {
-            "type": "package",
-            "package": {
-                "name": "drupal/og",
-                "type": "drupal-module",
-                "version": "master",
-                "source": {
-                    "url": "https://github.com/Gizra/og.git",
-                    "type": "git",
-                    "reference": "8.x-1.x"
-                }
-            }
-        },
-        "blt": {
-            "type": "vcs",
-            "url": "https://github.com/japerry/blt.git"
         }
     },
     "extra": {
@@ -137,29 +66,30 @@
                 "type:bower-asset",
                 "type:npm-asset"
             ],
-            "drush/contrib/{$name}": [
+            "drush/Commands/{$name}": [
+                "type:drupal-drush",
                 "type:drupal-drush"
             ]
         },
         "patches": [],
         "enable-patching": true,
         "merge-plugin": {
-            "require": [
-                "blt/composer.required.json",
-                "blt/composer.suggested.json"
-            ],
-            "include": [
-                "blt/composer.overrides.json"
-            ],
             "merge-extra": true,
             "merge-extra-deep": true,
             "merge-scripts": true,
             "replace": false,
-            "ignore-duplicates": true
+            "ignore-duplicates": true,
+            "require": [
+                "blt/composer.required.json",
+                "blt/composer.suggested.json"
+            ]
         },
         "installer-types": [
             "bower-asset",
             "npm-asset"
         ]
+    },
+    "config": {
+        "sort-packages": true
     }
 }

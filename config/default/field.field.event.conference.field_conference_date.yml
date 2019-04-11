@@ -1,0 +1,26 @@
+uuid: 84d54032-968e-4612-b21b-ca3ee955ed9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - event.event_type.conference
+    - field.storage.event.field_conference_date
+  module:
+    - datetime_range
+id: event.conference.field_conference_date
+field_name: field_conference_date
+entity_type: event
+bundle: conference
+label: Date
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+    default_end_date_type: now
+    default_end_date: now
+default_value_callback: ''
+settings: {  }
+field_type: daterange

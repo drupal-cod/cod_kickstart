@@ -1,0 +1,14 @@
+uuid: 66da49e0-0479-4bbf-aeaa-cbe53f593ede
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+id: conference-anonymous
+label: Anonymous
+weight: -102
+internal: true
+audience: anonymous
+group_type: conference
+permissions_ui: true
+permissions: {  }

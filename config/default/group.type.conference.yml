@@ -1,0 +1,11 @@
+uuid: 9731a873-ae21-4fe4-9292-97ea88007034
+langcode: en
+status: true
+dependencies: {  }
+id: conference
+label: Conference
+description: ''
+creator_membership: true
+creator_wizard: true
+creator_roles:
+  - conference-admin

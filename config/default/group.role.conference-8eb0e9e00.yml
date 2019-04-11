@@ -1,0 +1,17 @@
+uuid: 8d931108-305f-426c-a392-7de67b084a99
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.layout_manager
+id: conference-8eb0e9e00
+label: 'Layout manager'
+weight: 2
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

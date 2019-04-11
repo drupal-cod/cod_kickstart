@@ -1,0 +1,42 @@
+uuid: f2c6fd35-24a5-4bf0-8093-e7d47f760dc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - event.event_type.conference
+    - field.field.event.conference.field_conference_date
+  module:
+    - datetime_range
+    - user
+id: event.conference.default
+targetEntityType: event
+bundle: conference
+mode: default
+content:
+  field_conference_date:
+    weight: 1
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  name:
+    label: above
+    type: string
+    weight: -4
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  scheduled_publication: true

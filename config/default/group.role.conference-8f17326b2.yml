@@ -1,0 +1,17 @@
+uuid: dc557651-ca76-4eee-a56b-8bd0d9a3eeb2
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.media_manager
+id: conference-8f17326b2
+label: 'Media manager'
+weight: 6
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

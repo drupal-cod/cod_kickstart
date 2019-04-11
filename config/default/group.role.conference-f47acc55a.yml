@@ -1,0 +1,17 @@
+uuid: 67d700a8-260e-4845-8454-b41adc33d31e
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+  enforced:
+    config:
+      - user.role.media_creator
+id: conference-f47acc55a
+label: 'Media creator'
+weight: 5
+internal: true
+audience: outsider
+group_type: conference
+permissions_ui: false
+permissions: {  }

@@ -1,0 +1,14 @@
+uuid: ee2532b3-acea-44f3-a99e-f19cbb380d92
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+id: conference-member
+label: Member
+weight: -100
+internal: true
+audience: member
+group_type: conference
+permissions_ui: true
+permissions: {  }

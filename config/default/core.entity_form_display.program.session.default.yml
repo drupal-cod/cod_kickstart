@@ -1,0 +1,52 @@
+uuid: 0d76a698-bfbc-41e1-bdf0-57205c1e0c9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.program.session.field_experience_level
+    - field.field.program.session.field_files
+    - field.field.program.session.field_slides_link
+    - field.field.program.session.field_status
+    - program.program_type.session
+  module:
+    - content_moderation
+    - datetime
+id: program.session.default
+targetEntityType: program
+bundle: session
+mode: default
+content:
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden:
+  field_experience_level: true
+  field_files: true
+  field_slides_link: true
+  field_status: true

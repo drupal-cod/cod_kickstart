@@ -1,0 +1,23 @@
+uuid: af2587a7-238c-4bf1-98ac-bc7df0ee95c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.conference
+id: conference-admin
+label: Admin
+weight: 100
+internal: false
+audience: member
+group_type: conference
+permissions_ui: true
+permissions:
+  - 'access content overview'
+  - 'administer group'
+  - 'delete group'
+  - 'edit group'
+  - 'view group'
+  - 'administer members'
+  - 'update own group_membership content'
+  - 'leave group'
+  - 'view group_membership content'

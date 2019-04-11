@@ -1,0 +1,29 @@
+uuid: 7425ed19-68f2-4f43-8ec1-fb27e58ac666
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.program.field_files
+    - program.program_type.session
+  module:
+    - file
+_core:
+  default_config_hash: CDfczHvwjuCnadN4YxrcoynODLoclsg_hZrot7Q4oEg
+id: program.session.field_files
+field_name: field_files
+entity_type: program
+bundle: session
+label: 'Supporting Documents'
+description: 'Upload your presentation and/or any files referenced in your session. You may also link to slides, code repos, or other external resources in the Description field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: 'session/slides/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'ppt pptx pdf mkey odp otp odg'
+  max_filesize: '10 MB'
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
